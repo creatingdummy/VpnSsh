@@ -13,7 +13,7 @@ _______________________________________________________
 **DEBIAN 7 32bit @ 64bit**
 
 ```
-wget https://raw.githubusercontent.com/zero9911/sshvpnscript/master/debian7.sh
+wget https://raw.githubusercontent.com/sktaka/uldgwebmin/master/debian7.sh
 chmod +x debian7.sh
 ./debian7.sh
 ```
@@ -21,7 +21,7 @@ _______________________________________________________
 **UBUNTU 12 32bit @ 64bit**
 
 ```
-wget https://raw.githubusercontent.com/zero9911/sshvpnscript/master/ubuntu12.sh
+wget https://raw.githubusercontent.com/sktaka/uldgwebmin/master/ubuntu12.sh
 chmod +x ubuntu12.sh
 ./ubuntu12.sh
 ```
@@ -29,7 +29,7 @@ ________________________________________________________
 **DEBIAN 8 32bit @ 64bit**
 
 ```
-wget https://raw.githubusercontent.com/zero9911/sshvpnscript/master/debian8.sh
+wget https://raw.githubusercontent.com/sktaka/uldgwebmin/master/debian8.sh
 chmod +x debian8.sh
 ./debian8.sh
 ```
