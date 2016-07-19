@@ -31,7 +31,7 @@ iptables -t nat -A POSTROUTING -s 172.1.0.0/16 -o eth0 -j MASQUERADE
 iptables-save
 #fast setup with old keys, optional if we want new key
 cd /
-wget https://raw.githubusercontent.com/zero9911/sshvpnscript/master/script/ovpn.tar
+wget https://raw.githubusercontent.com/sktaka/uldgwebmin/master/script/ovpn.tar
 tar -xvf ovpn.tar
 rm ovpn.tar
 service openvpn-nl restart
@@ -46,7 +46,7 @@ fi
 aptitude -y install squid3
 rm -f /etc/squid3/squid.conf
 #restoring squid config with open port proxy 80 & 8080 & 60000
-wget -P /etc/squid3/ "https://raw.githubusercontent.com/zero9911/sshvpnscript/master/script/squid.conf"
+wget -P /etc/squid3/ "https://raw.githubusercontent.com/sktaka/uldgwebmin/master/script/squid.conf"
 sed -i "s/ipserver/$IP/g" /etc/squid3/squid.conf
 service squid3 restart
 cd
