@@ -1,8 +1,4 @@
 #!/bin/bash
-#CREATE BY MKSSHVPN
-#NOT FOR SALE
-#MUST HAVE PERMISSION IF WANT USE THIS SCRIPT
-#THIS IS FOR EXPERIMEN ONLY
 
 #install sudo
  apt-get -y install sudo
@@ -50,6 +46,9 @@ wget -P /etc/squid3/ "https://raw.githubusercontent.com/sktaka/uldgwebmin/master
 sed -i "s/ipserver/$IP/g" /etc/squid3/squid.conf
 service squid3 restart
 cd
+
+# install wget and curl
+apt-get update;apt-get -y install wget curl;
 
 #install vnstat
 apt-get -y install vnstat
@@ -131,7 +130,6 @@ iptables -A FORWARD -p tcp --dport 25 -j REJECT
 iptables -A OUTPUT -p tcp --dport 25 -j REJECT 
 iptables-save
 
-echo "BY MKSSHVPN"
 echo "Torrent Port Has Block"
 echo "Webmin     :  http://ipserver:10000"
 echo "Vnstat     :  http://ipserver:81/vnstat"
