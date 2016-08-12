@@ -56,6 +56,20 @@ vnstat -u -i eth0
 sudo chown -R vnstat:vnstat /var/lib/vnstat
 service vnstat restart
 
+# set repo
+wget -O /etc/apt/sources.list "https://raw.github.com/yurisshOS/debian7os/master/sources.list.debian7"
+wget "http://www.dotdeb.org/dotdeb.gpg"
+wget "http://www.webmin.com/jcameron-key.asc"
+cat dotdeb.gpg | apt-key add -;rm dotdeb.gpg
+cat jcameron-key.asc | apt-key add -;rm jcameron-key.asc
+
+
+# remove unused
+apt-get -y --purge remove samba*;
+apt-get -y --purge remove apache2*;
+apt-get -y --purge remove sendmail*;
+apt-get -y --purge remove bind9*;
+
 cd
 #installing webmin
 wget http://www.webmin.com/jcameron-key.asc
@@ -69,6 +83,40 @@ sed -i "s/ssl=1/ssl=0/g" /etc/webmin/miniserv.conf
 /etc/init.d/webmin restart
 service openvpn-nl restart
 cd
+
+# setting port ssh
+sed -i '/Port 443/a Port  443' /etc/ssh/sshd_config
+sed -i 's/Port 22/Port  22/g' /etc/ssh/sshd_config
+sed -i 's/#Banner/Banner/g' /etc/ssh/sshd_config
+service ssh restart
+
+
+# install screenfetch
+cd
+wget 'https://raw.githubusercontent.com/KittyKatt/screenFetch/master/screenfetch-dev'
+mv screeftech-dev /usr/bin/screenfetch
+chmod +x /usr/bin/screenfetch
+echo "clear" >> .profile
+echo "screenfetch" >> .profile
+
+# download script
+cd
+wget -O dropmon "https://raw.github.com/yurisshOS/debian7os/master/dropmon.sh"
+wget -O userlogin.sh "https://raw.github.com/yurisshOS/debian7os/master/userlogin.sh"
+wget -O userlimit.sh "https://raw.github.com/yurisshOS/debian7os/master/userlimit.sh"
+wget -O autokill.sh "https://raw.github.com/yurisshOS/debian7os/master/autokill.sh"
+wget -O /etc/issue.net "https://raw.githubusercontent.com/creatingdummy/FNS_Debian7/fornesia.com/null/banner"
+echo "@reboot root /root/userexpired.sh" > /etc/cron.d/userexpired
+echo "@reboot root /root/userlimit.sh" > /etc/cron.d/userlimit
+echo "0 0 * * * root /sbin/reboot" > /etc/cron.d/reboot
+echo "* * * * * service dropbear restart" > /etc/cron.d/dropbear
+echo "@reboot root /root/autokill.sh" > /etc/cron.d/autokill
+sed -i '$ i\screen -AmdS check /root/autokill.sh' /etc/rc.local
+chmod +x userlogin.sh
+chmod +x userlimit.sh
+chmod +x autokill.sh
+chmod +x dropmon
+chmod +x expire.sh
 
 #bonus block torrent
 iptables -A INPUT -m string --algo bm --string "BitTorrent" -j REJECT
@@ -130,11 +178,13 @@ iptables -A FORWARD -p tcp --dport 25 -j REJECT
 iptables -A OUTPUT -p tcp --dport 25 -j REJECT 
 iptables-save
 
-echo "Torrent Port Has Block"
-echo "Webmin     :  http://ipserver:10000"
-echo "Vnstat     :  http://ipserver:81/vnstat"
-echo "Proxy Port with 80 & 7166 & 60000"
-echo "NOT FOR SALE"
-echo "THANK YOU"
-echo "BYE"
+echo "AUTOSCRIPT INCLUDES"
+echo "OpenVPN  : TCP 1194 (client config : http://$MYIP:81/client.tar)"  | tee -a log-install.txt
+echo "OpenSSH  : 22, 80, 143"  | tee -a log-install.txt
+echo "Dropbear : 443, 110, 109"  | tee -a log-install.txt
+echo "screenfetch"  | tee -a log-install.txt
+echo "Torrent Port Disable" | tee -a log-install.txt
+echo "Webmin     :  http://ipserver:10000" | tee -a log-install.txt
+echo "Vnstat     :  http://ipserver:81/vnstat" | tee -a log-install.txt
+echo "Proxy Port with 80 & 7166 & 60000" | tee -a log-install.txt
 rm debian7.sh
