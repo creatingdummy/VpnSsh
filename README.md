@@ -2,12 +2,9 @@ _______________________________________________________
 **VPN SCRIPT**
 
 - OPENVPN
-- OPENVPN PORT 5999
+- OPENVPN PORT 443
 - WEBMIN
-- SQUID PROXY - 80,7166,60000
-- BLOCK TORRENT PORT (such as BitTorrent)
-- SHA256
-- AES256
+- SQUID PROXY - 8080
 
 _______________________________________________________
 **DEBIAN 7 32bit @ 64bit**
