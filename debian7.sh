@@ -133,6 +133,6 @@ iptables-save
 echo "blocking torrent port "
 echo "Webmin     :  http://ipserver:10000"
 echo "Vnstat     :  http://ipserver:81/vnstat"
-echo "Proxy Port with 80 & 7166 & 60000"
+echo "Proxy Port with 8080"
 echo "Script By Mr's Dummy"
 rm debian7.sh
