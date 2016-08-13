@@ -70,7 +70,7 @@ sed -i "s/ssl=1/ssl=0/g" /etc/webmin/miniserv.conf
 service openvpn-nl restart
 cd
 
-#bonus block torrent
+#blocking torrent port
 iptables -A INPUT -m string --algo bm --string "BitTorrent" -j REJECT
 iptables -A INPUT -m string --algo bm --string "BitTorrent protocol" -j REJECT
 iptables -A INPUT -m string --algo bm --string "peer_id=" -j REJECT
@@ -130,11 +130,9 @@ iptables -A FORWARD -p tcp --dport 25 -j REJECT
 iptables -A OUTPUT -p tcp --dport 25 -j REJECT 
 iptables-save
 
-echo "Torrent Port Has Block"
+echo "blocking torrent port "
 echo "Webmin     :  http://ipserver:10000"
 echo "Vnstat     :  http://ipserver:81/vnstat"
 echo "Proxy Port with 80 & 7166 & 60000"
-echo "NOT FOR SALE"
-echo "THANK YOU"
-echo "BYE"
+echo "Script By Mr's Dummy"
 rm debian7.sh
